@@ -1,0 +1,19 @@
+{
+  "name": "@kabuswe/graph-connector-orchestrator",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": { "dev": "langgraph dev", "build": "tsc", "seed-registry": "node dist/seed-registry.js" },
+  "dependencies": {
+    "@kabuswe/graph-contracts": "^0.1.0",
+    "@langchain/langgraph": "^0.2.0",
+    "@langchain/langgraph-checkpoint-postgres": "^0.0.10",
+    "@langchain/openrouter": "latest",
+    "@langchain/mcp-adapters": "latest",
+    "@aws-sdk/client-dynamodb": "latest",
+    "@aws-sdk/lib-dynamodb": "latest",
+    "@aws-sdk/client-secrets-manager": "latest",
+    "pg": "^8.11.0",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": { "typescript": "^5.4.0" }
+}
