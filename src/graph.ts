@@ -7,9 +7,7 @@
  * Output: ConnectorOrchestratorOutput (validatedResult, resultStatus, creditsDeducted, telemetryId)
  *
  * emitTelemetry is unconditional — runs on all paths including errors.
- * TODO: implement nodes under src/nodes/ per PRD.md
- * TODO: implement src/connectors/[id].ts registry
- * TODO: implement src/seed-registry.ts
+ * Implementation tracked in GitHub issues — see repo Issues tab.
  */
 
 import { StateGraph, START, END, MemorySaver, StateSchema, UntrackedValue } from '@langchain/langgraph';
@@ -45,13 +43,12 @@ const ConnectorState = new StateSchema({
 
 const standardRetry = { maxAttempts: 3, initialInterval: 1000, backoffFactor: 2 };
 
-// TODO: replace with real implementations
-const resolveConnectorNode    = async (s: any) => ({ phase: 'resolve-connector', connectorConfig: {}, creditWeight: 1 });
-const authenticateViaMCPNode  = async (s: any) => ({ phase: 'authenticate', authStatus: 'ok' as const });
-const executeActionNode       = async (s: any) => ({ phase: 'execute-action', rawResult: null, toolCalls: [], executionMs: 0 });
-const validateResultNode      = async (s: any) => ({ phase: 'validate-result', validatedResult: s.rawResult, resultStatus: 'success' as const });
-const deductCreditsNode       = async (s: any) => ({ phase: 'deduct-credits', creditsDeducted: s.creditWeight, remainingCredits: 0, creditStatus: 'ok' as const });
-const emitTelemetryNode       = async (s: any) => ({ phase: 'emit-telemetry', telemetryId: crypto.randomUUID(), emittedAt: new Date().toISOString() });
+import { resolveConnectorNode }   from './nodes/resolveConnector.js';
+import { authenticateViaMCPNode } from './nodes/authenticateViaMCP.js';
+import { executeActionNode }      from './nodes/executeAction.js';
+import { validateResultNode }     from './nodes/validateResult.js';
+import { deductCreditsNode }      from './nodes/deductCredits.js';
+import { emitTelemetryNode }      from './nodes/emitTelemetry.js';
 
 function assembleGraph(checkpointer?: MemorySaver) {
   const builder = new StateGraph(ConnectorState)
