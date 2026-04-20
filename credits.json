@@ -3,5 +3,15 @@
     "clientId": "test-client",
     "balance": 997,
     "updatedAt": "2026-04-19T18:03:52.420Z"
+  },
+  {
+    "clientId": "vitest-1776666480128",
+    "balance": 999,
+    "updatedAt": "2026-04-20T06:28:00.128Z"
+  },
+  {
+    "clientId": "vitest-client",
+    "balance": 999,
+    "updatedAt": "2026-04-20T06:28:00.859Z"
   }
 ]
